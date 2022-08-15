@@ -32,14 +32,14 @@ pipeline {
         stage('Deploy to Docker Host') {
           steps {
             sh    'docker -H tcp://10.1.1.21:2375 stop masterwebapp1 || true'
-            sh    'docker -H tcp://10.1.1.21:2375 run --rm -dit --name masterwebapp1 --hostname masterwebapp1 -p 8000:80 jaswiktechnologiesdocker/nginx:${BUILD_NUMBER}'
+            sh    'docker -H tcp://10.1.1.21:2375 run --rm -dit --name masterwebapp1 --hostname masterwebapp1 -p 8001:80 jaswiktechnologiesdocker/nginx:${BUILD_NUMBER}'
             }
         }
 
         stage('Check WebApp Rechability') {
           steps {
           sh 'sleep 10s'
-          sh ' curl http://10.1.1.21:8000'
+          sh ' curl http://10.1.1.21:8001'
          
           }
         }
